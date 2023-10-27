@@ -42,7 +42,10 @@ export class TasksService {
   }
 
   deleteTask(id: string): void {
-    this.tasks = this.tasks.filter((task: Task) => task.id !== id);
+    const isExist: boolean = Boolean(this.getTaskById(id));
+    if (isExist) {
+      this.tasks = this.tasks.filter((task: Task) => task.id !== id);
+    }
   }
 
   updateTask(id: string, updateTaskDto: UpdateTaskDto): Task {
