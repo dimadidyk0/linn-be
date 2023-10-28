@@ -51,7 +51,7 @@ export class TasksService {
   updateTask(id: string, updateTaskDto: UpdateTaskDto): Task {
     const existingTaskIndex = this.tasks.findIndex((task) => task.id === id);
 
-    if (!existingTaskIndex) {
+    if (existingTaskIndex === -1) {
       throw new NotFoundException(`Task with id ${id} is not found`);
     }
 
