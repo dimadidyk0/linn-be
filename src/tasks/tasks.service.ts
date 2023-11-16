@@ -44,12 +44,13 @@ export class TasksService {
   //     return true;
   //   });
   // }
-  // deleteTask(id: string): void {
-  //   const isExist: boolean = Boolean(this.getTaskById(id));
-  //   if (isExist) {
-  //     this.tasks = this.tasks.filter((task: Task) => task.id !== id);
-  //   }
-  // }
+  async deleteTask(id: string): Promise<void> {
+    const result = await this.tasksRepository.delete(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`Task with id ${id} is not found`);
+    }
+  }
   // updateTask(id: string, updateTaskDto: UpdateTaskDto): Task {
   //   const existingTaskIndex = this.tasks.findIndex((task) => task.id === id);
   //   if (existingTaskIndex === -1) {
